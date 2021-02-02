@@ -1,0 +1,122 @@
+1. User, Database 생성 및 권한부여
+MariaDB [none]> create database webdb;
+Query OK, 1 row affected (0.01 sec)
+
+MariaDB [none]> grant all privileges on webdb.* to itbank@localhost identified by 'itbank';
+Query OK, 0 rows affected (0.00 sec)
+
+2. Member Table 생성
+MariaDB [none]> use webdb;
+Database changed
+
+MariaDB [webdb]> create table member(ID varchar(10) primary key not null, PW varchar(100) not null, Name varchar(10) not null, Birthdate date not null, Gender varchar(6) not null, concern varchar(50) not null, phone varchar(20) not null, addr varchar(50) not null, Mail varchar(50) not null);
+
+MariaDB [webdb]> desc member;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| ID        | varchar(10)  | NO   | PRI | NULL    |       |
+| PW        | varchar(100) | NO   |     | NULL    |       |
+| Name      | varchar(10)  | NO   |     | NULL    |       |
+| Birthdate | date         | NO   |     | NULL    |       |
+| Gender    | varchar(6)   | NO   |     | NULL    |       |
+| concern   | varchar(50)  | NO   |     | NULL    |       |
+| phone     | varchar(20)  | NO   |     | NULL    |       |
+| addr      | varchar(50)  | NO   |     | NULL    |       |
+| Mail      | varchar(50)  | NO   |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+9 rows in set (0.083 sec)
+
+MariaDB [webdb]> select * from member;
++-------+-------------------------------------------+-------+------------+--------+---------+---------------+---------+-----------------+
+| ID    | PW                                        | Name  | Birthdate  | Gender | concern | phone         | addr    | Mail            |
++-------+-------------------------------------------+-------+------------+--------+---------+---------------+---------+-----------------+
+| User1 | *E6CC90B878B948C35E92B003C792C46C58C4AF40 | KIM   | 1993-10-17 | man    | IT      | 010-0000-0000 | DAEJEON | User1@cloud.com |
+| User2 | *12033B78389744F3F39AC4CE4CCFCAD6960D8EA0 | HWANG | 1960-01-01 | woman  | SKI     | 010-0001-0002 | SEOUL   | User2@cloud.com |
++-------+-------------------------------------------+-------+------------+--------+---------+---------------+---------+-----------------+
+2 rows in set (0.002 sec)
+
+
+3. Board Table 생성
+MariaDB [webdb]> create table board(No int auto_increment primary key, Title varchar(50) not null, Content varchar(500) not null, Userid varchar(20) not null, Date varchar(50) not null);
+Query OK, 0 rows affected (0.026 sec)
+
+MariaDB [webdb]> desc board;
++---------+--------------+------+-----+---------+----------------+
+| Field   | Type         | Null | Key | Default | Extra          |
++---------+--------------+------+-----+---------+----------------+
+| No      | int(11)      | NO   | PRI | NULL    | auto_increment |
+| Title   | varchar(50)  | NO   |     | NULL    |                |
+| Content | varchar(500) | NO   |     | NULL    |                |
+| Userid  | varchar(20)  | NO   |     | NULL    |                |
+| Date    | varchar(50)  | NO   |     | NULL    |                |
++---------+--------------+------+-----+---------+----------------+
+5 rows in set (0.021 sec)
+
+[ TEST Data 입력 ]
+insert into board values(1,"Hi I'm First","test1","User1","2021-01-01");
+insert into board values(2,"How are you?","test2","User2","2021-01-01");
+insert into board values(3,"Third","test3","User3","2021-01-02");
+insert into board values(4,"4th","test4","User4","2021-01-02");
+insert into board values(5,"This is good!","test5","User5","2021-01-03");
+insert into board values(6,"6th-revolution","test6","User1","2021-01-03");
+insert into board values(7,"Do you know?","test7","User2","2021-01-04");
+insert into board values(8,"888888","test8","User3","2021-01-05");
+insert into board values(9,"nine nine nine","test9","User4","2021-01-06");
+insert into board values(10,"Chirstmas","test10","User5","2021-01-07");
+insert into board values(11,"cloud1","cloud1","User1","2021-01-11");
+insert into board values(12,"cloud2","cloud2","User2","2021-01-12");
+insert into board values(13,"cloud3","cloud3","User3","2021-01-13");
+insert into board values(14,"cloud4","cloud4","User4","2021-01-14");
+insert into board values(15,"cloud5","cloud5","User5","2021-01-15");
+insert into board values(16,"cloud6","cloud6","User1","2021-01-16");
+insert into board values(17,"cloud7","cloud7","User2","2021-01-17");
+insert into board values(18,"cloud8","cloud8","User3","2021-01-18");
+insert into board values(19,"cloud9","cloud9","User4","2021-01-19");
+insert into board values(20,"cloud10","cloud10","User5","2021-01-20");
+insert into board values(21,"4team_HW01","4team_1","User1","2021-01-21");
+insert into board values(22,"4team_HW02","4team_2","User2","2021-01-22");
+insert into board values(23,"4team_HW03","4team_3","User3","2021-01-23");
+insert into board values(24,"4team_HW04","4team_4","User4","2021-01-24");
+insert into board values(25,"4team_HW05","4team_5","User5","2021-01-25");
+insert into board values(26,"4team_HW06","4team_6","User1","2021-01-26");
+insert into board values(27,"4team_HW07","4team_7","User2","2021-01-27");
+insert into board values(28,"4team_HW08","4team_8","User3","2021-01-28");
+insert into board values(29,"4team_HW09","4team_9","User4","2021-01-29");
+insert into board values(30,"4team_HW10","4team_10","User5","2021-01-30");
+insert into board values(31,"Soccer1","Kame","User1","2021-01-11");
+insert into board values(32,"Soccer2","Son","User2","2021-01-12");
+insert into board values(33,"Soccer3","Ali","User3","2021-01-13");
+insert into board values(34,"Soccer4","Ariksen","User4","2021-01-14");
+insert into board values(35,"Soccer5","Dier","User5","2021-01-15");
+insert into board values(36,"Soccer6","Yoris","User1","2021-01-16");
+insert into board values(37,"Soccer7","Sissoko","User2","2021-01-17");
+insert into board values(38,"Soccer8","Salah","User3","2021-01-18");
+insert into board values(39,"Soccer9","Mane","User4","2021-01-19");
+insert into board values(40,"Soccer10","Pierre","User5","2021-01-20");
+insert into board values(41,"A","BBB","User1","2021-01-21");
+insert into board values(42,"B","BBB","User2","2021-01-22");
+insert into board values(43,"C","BBB","User3","2021-01-23");
+insert into board values(44,"D","BBB","User4","2021-01-24");
+insert into board values(45,"E","BBB","User5","2021-01-25");
+insert into board values(46,"F","BBB","User1","2021-01-26");
+insert into board values(47,"G","BBB","User2","2021-01-27");
+insert into board values(48,"I'm fine thank you!","nice","User3","2021-01-28");
+insert into board values(49,"Hello World!","hello","User4","2021-01-29");
+insert into board values(50,"Welcome to Cloud.com","Welcome","User5","2021-01-30");
+insert into board values(51,"KK","Mane2","User1","2021-02-01");
+insert into board values(52,"lol~","Son2","User2","2021-02-01");
+insert into board values(53,"Happy Day","Yoris2","User3","2021-02-01");
+
+※ 세션 확인
+<?php
+  echo '<pre>';
+  var_dump($_SESSION);
+  echo '</pre>';
+?>
+
+※ 순서 번호 초기화
+$CNT = "SET @CNT=0";
+$Auto_Increment = "UPDATE member SET member.no = @CNT:=@CNT+1";
+
+
